@@ -1,0 +1,102 @@
+\documentclass[fleqn]{article}
+\usepackage{cmap}
+\usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+\usepackage{mathexam}
+\usepackage{mathtext} 				% русские буквы в фомулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+\usepackage{enumerate}
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools,amsthm} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+\usepackage{graphicx}
+%% Шрифты
+\usepackage{euscript}	 % Шрифт Евклид
+\usepackage{mathrsfs} % Красивый матшрифт
+\ExamClass{SE Academic University}
+\ExamName{Matching 2}
+\ExamHead{\today}
+
+%% Шрифты
+\usepackage{euscript}	 % Шрифт Евклид
+\usepackage{mathrsfs} % Красивый матшрифт
+
+%Листинг кода
+%\usepackage{listings}
+\usepackage{listingsutf8}
+\usepackage{color}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+%Для листинга кода
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.63,0.082,0.082}
+
+
+\lstset{
+	inputencoding=utf8,
+	%
+	backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+	basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+	breaklines=true,                 % sets automatic line breaking
+	captionpos=b,                    % sets the caption-position to bottom
+	commentstyle=\color{black},    % comment style
+	deletekeywords={...},            % if you want to delete keywords from the given language
+	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+	extendedchars=\true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+	frame=false,                    % adds a frame around the code
+	keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+	keywordstyle=\color{blue},       % keyword style
+	morekeywords={*,...},            % if you want to add more keywords to the set
+	numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+	numbersep=5pt,                   % how far the line-numbers are from the code
+	numberstyle=\tiny\color{black}, % the style that is used for the line-numbers
+	rulecolor=\color{white},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+	showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+	showstringspaces=false,          % underline spaces within strings only
+	showtabs=false,                  % show tabs within strings adding particular underscores
+	stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+	stringstyle=\color{black},     % string literal style
+	tabsize=4                  % sets default tabsize to 2 spaces
+	% show the filename of files included with \lstinputlisting; also try caption instead of title
+}   
+
+
+\let\ds\displaystyle
+
+\begin{document}
+	\section{Двудольные графы}
+	\begin{enumerate}
+		\item Какое максимальное число ребер может быть в простом двудольном графе на 11 вершинах?
+		
+		Достаточно рассмотреть случай полного двудольного графа $K_{n,m}$(Т.к. больше чем в нем ребер в любом другом двудольном графе быть не может, т.к. любой неполный граф можно привести к полному добавляя ребра). Количество ребер в графе $K_{n,m}$, очевидно равно $n\cdot m$. Поэтому для ответа нужно найти $n, m$ такие, что $n+m = 11$ и произведение $m\cdot m$ максимально. Можно выбрать, к примеру такие: $m = 5, n = 6$. Тогда $|V(K_{n,m})| = 5\cdot6 = 30$
+		
+		\item Доказать, что шахматную доску размером $8\times8$ после удаления двух противоположных угловых клеток невозможно замостить костяшками домино (или клетками размерами $2\times1$ или $1\times 2$).
+		
+		Замостить доске костяшками домино - это то же самое что найти совершенное паросочетание в графе, где смежными являются только вершины, которые соответствуют соседним по ребру клеткам шахматной доски. Поэтому далее будет доказывать отсутствие совершенного паросочетания в соответствующем графе. Заметим, что доска $8\times8$ - раскрашена в $2$ цвета так, что никакие $2$ клетки одного цвета рядом не стоят. Это значит, что доске $8\times 8$ соответствует какой-то двудольный граф. В этой графе $32$ вершины в одной доле и $32$ во второй доле. Теперь заметим, что противоположные клетки на шахматной доске окрашены в один цвет, значит удаляя их, мы удаляем только вершины одной доли, и соответствующий граф теперь состоит из $2$ долей : $32$ и $30$ вершин. Вне зависимости от конфигурации ребер, совершенного паросочетания в таком двудольном графе не может быть. (т.к. в паросочетании максимам может быть $30$ ребер, которыми можно покрыть лишь $60$ вершин из $62$).Значит и расставить костяшки домино невозможно.
+		
+	\end{enumerate}
+	
+	\section{Паросочетания в двудольных графах}
+	\begin{enumerate}
+		\item Найти количество $X$-насыщенных паросочетаний в полном двудольном графе $K_{n,m}$, где $X$ — это доля меньшего размера. Решите эту задачу для $n=8,m=23$.
+		
+		
+		Пусть $m \geqslant n$. Тогда достаточно заметить, что первую вершину меньшей доли можем соединить ребром в паросочетании с $m$ ребрами, вторую с $m-1$, и т.д. Итого получим $m\cdot(m-1)\cdot (m-2)\cdots (m-n+1) = \frac{m!}{(m-n)!}$. Ответ для частного случая равен $\frac{23}{(23-8)!} = \frac{23!}{15!} = 19769460480$.
+		
+		\item Доказать, что в непустом k-регулярном двудольном графе всегда существует совершенное паросочетание.
+		
+		Рассмотрим данный граф. Обозначим его доли как $X, Y$. Посчитаем количество ребер исходящих во вторую долю из $X$. Это количество равно $k|X|$. Это же количество ребер входит в множество вершин $N(A) \subset Y$. Рассмотрим случай, когда $|N(A)| < |A|$. Это значит, что в $|N(A)|$ вершин входит $k|A|$ ребер. Но тогда по принципу Дирихле в $N(A)$ найдется вершина, степень которой превысит $k$ (рассаживаем $k|A|$ кроликов по $|N(A)|$ клеткам вместимости $k$ - рассадив $k|N(A)|$ кроликов, все клетки окажутся заполнены, но ещё останется рассадить $k(|A| - |N(A)|) > 0$ кроликов, которым не хватит места ни в одной клетке). И значит, $|N(A)|\geqslant |A|$. Т.к. $A$ выбрали произвольно, то неравенство выполняется и для всех $A \subset X$. Значит каждое максимальное паросочетание покрывает $X$. 
+		
+		Теперь если провести аналогичные рассуждения для $Y$, получим, что можно покрыть и $X$ и $Y$ любым максимальным паросочетанием, а это значит, что любое максимальное паросочетание является совершенным.
+	\end{enumerate}
+		\section{Частично-упорядоченные множества}
+		\begin{enumerate}
+		\item Король сказочной страны пригласил на пир всех людоедов своей страны. Среди них есть людоеды, которые хотят съесть других людоедов. Известно, что максимальная цепочка, в которой первый людоед хочет съесть второго, второй — третьего и так далее, состоит из шести людоедов (в частности, нет циклов). Каково минимальное количество столов, за которые король может так рассадить людоедов, чтобы ни за одним из этих столов никто не захочет съесть никого из сидящих за тем же столом? Докажите свой ответ.
+		
+		\textbf{Решение.} Из условия задачи не ясно является ли отношение "хочет съесть" отношением частичного порядка на множестве людоедов. Поэтому решим задачу для обоих случаев:Отношение "хочет съесть" задает частичный порядок на множестве людоедов. В этом случае применима теорема Мирского, по которой следует, что размер минимального множества антицепей, на которые можно разбить исходное множество равно длине максимальной цепи. Для данной задачи длина максимальной цепи равна $6$, поэтому достаточно разбить множество на $6$ антицепей, и людоедов из каждой антицепи усадить за свой стол. В этом случае (по опредению антицепи), сидящие за одним столом не захотят съесть друг друга.Если же отношение не транзитивное. В этом случае минимальное количество столов зависит от конфигурации множества людоедов: например, если их всего $6$, и они образуют цепочку, то тогда их можно рассадить за $2$ стола: чередуя людоедов в максимальной цепочки рассадить их в разные комнаты. Добавляя и для других пар людоедов отношение "хочет съесть" можем получать различное количество столов, но это количество меньше $6$. Т.к. для того чтобы рассадить их за 6 столов есть алгоритм: Выбираем всех людоедов, которых никто не хочет есть, садим за один стол (это множество непустое, т.к. нет циклов). После этой операции длины всех цепочек уменьшатся на $1$. Повторив такие действия 6 раз, все людоеды будут рассажены по столам, и никто не съест своих соседей по столу.
+	\end{enumerate}
+\end{document}
+
