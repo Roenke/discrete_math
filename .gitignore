@@ -4,6 +4,9 @@
 *.o
 *.obj
 
+# Compiled pdf files
+*.pdf
+
 # Precompiled Headers
 *.gch
 *.pch

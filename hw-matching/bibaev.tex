@@ -1,0 +1,138 @@
+\documentclass[fleqn]{article}
+\usepackage{cmap}
+\usepackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
+\usepackage{mathexam}
+\usepackage{mathtext} 				% русские буквы в фомулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+\usepackage{enumerate}
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools,amsthm} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+\usepackage{graphicx}
+%% Шрифты
+\usepackage{euscript}	 % Шрифт Евклид
+\usepackage{mathrsfs} % Красивый матшрифт
+\ExamClass{SE Academic University}
+\ExamName{Homework}
+\ExamHead{\today}
+
+%% Шрифты
+\usepackage{euscript}	 % Шрифт Евклид
+\usepackage{mathrsfs} % Красивый матшрифт
+
+%Листинг кода
+%\usepackage{listings}
+\usepackage{listingsutf8}
+\usepackage{color}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+%Для листинга кода
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.63,0.082,0.082}
+
+
+\lstset{
+	inputencoding=utf8,
+	%
+	backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+	basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+	breaklines=true,                 % sets automatic line breaking
+	captionpos=b,                    % sets the caption-position to bottom
+	commentstyle=\color{black},    % comment style
+	deletekeywords={...},            % if you want to delete keywords from the given language
+	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+	extendedchars=\true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+	frame=false,                    % adds a frame around the code
+	keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+	keywordstyle=\color{blue},       % keyword style
+	morekeywords={*,...},            % if you want to add more keywords to the set
+	numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+	numbersep=5pt,                   % how far the line-numbers are from the code
+	numberstyle=\tiny\color{black}, % the style that is used for the line-numbers
+	rulecolor=\color{white},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+	showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+	showstringspaces=false,          % underline spaces within strings only
+	showtabs=false,                  % show tabs within strings adding particular underscores
+	stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+	stringstyle=\color{black},     % string literal style
+	tabsize=4                  % sets default tabsize to 2 spaces
+	% show the filename of files included with \lstinputlisting; also try caption instead of title
+}   
+
+
+\let\ds\displaystyle
+
+\begin{document}
+	\begin{enumerate}
+	\item Пусть в двудольном графе $G = (X, Y)$ подмножество $S \subseteq X$ покрыто паросочетанием $M$, а подмножество $T \subseteq Y$ покрыто паросочетанием $M'$. Доказать, что в графе $G$ найдется паросочетание, покрывающее как $S$, так и $T$.
+	
+	\textbf{Решение.} Покажем как можно построить паросочетание, покрывающее как $S$, так и $T$. Назовем это паросочетание $M_{ST}$. Построим граф $M \cup M'$. Это будет двудольный граф, содержащий часть вершин из $X$ и из $Y$, причем все вершины множеств $S$, и $T$ так же, очевидно, в нем присутствуют + какие-то вершины, не входящие в эти два множества. Сразу же добавим в паросочетание $M_{ST}$ ребра из $M\cap M'$, т.к. они соединяют вершины $u \in S, v \in T$, степень который в новом графе 1, и мы обязаны включить эти ребра, чтобы покрыть $S$ и $T$ Удалим такие вершины из графа. 
+	 
+	 Рассмотрим теперь вершины степени 1 из $S\cup T$. Эти вершины соединены только с вершиной, которая не входит в $S\cup T$. Добавим такие ребра к $M_{ST}$. Осталось рассмотреть вершины степени $2$ из $S\cup T$. Они могут либо образовать цикл, либо путь с начальной и конечной вершиной, которые не входят в $S\cup T$. В случае когда это цикл, то он обязательно имеет четную длину (граф двудольный) и в нем есть совершенной паросочетание, которое добавим в $M_{ST}$, а когда путь с конечными вершинами не из $S\cup T$, то все его промежуточные вершины можно покрыть покрыть паросочетанием? которое соединим с $M_{ST}$.
+	 
+	 Т.к. степень вершины нового графа не может превышать 2, то мы показали способ найти ребро из $M_{ST}$ для произвольной вершины из $S\cup T$. И паросочетание $M_{ST}$ содержит все вершины из  $S\cup T$.
+	
+	\item Пусть $G = (X, Y)$ есть двудольный граф, в котором степень любой вершины блока $X$ больше или равна степени любой вершины блока $Y$. Доказать, что в графе $G$ обязательно существует $X$-насыщенное паросочетание.
+	
+	\textbf{Решение.} Предположим противное. Это значит, что в $G$ нет $X$-насыщенного паросочетания. Значит, по теореме Холла $\exists T \subseteq X : |T| > |N(T)|$. Пусть из $T$ выходит $k$ ребер. Найдем вершину минимальной степени в множестве $T$, обозначим её $v_{min}$, очевидно, что $\deg(v_{min}) \leqslant \dfrac{k}{|T|}$.
+	
+	Теперь заметим, что эти же $k$ ребер входят в вершины множества $N(T)$. Найдем вершину с максимальной степенью в $N(T)$, обозначим её $u_{max}$. Для её степени справедлива оценка $\deg(u_{max}) \geqslant \dfrac{k}{|N(T)|}$.
+	
+	Теперь сравним степени указанных вершин (по условию должно быть $\deg(v_{min}) \geqslant \deg(u_{max})$. Но у нас получились следующие оценки:
+	
+	$$\deg(v_{min}) \leqslant \frac{k}{|T|} < \frac{k}{|N(T)|} \leqslant \deg(u_{max})$$
+	
+	То есть получили, что $\deg(v_{min}) < \deg(u_{max})$, но это противоречие. Значит условие теоремы Холла выполняется, и, следовательно в графе существует $X$-насыщенное паросочетание.
+	
+	\item Пусть $G = (X, Y)$ есть двудольный граф, в котором $|N(S)| > |S|$ для любого подмножества $S \neq \emptyset$	блока $X$. Доказать, что в таком графе любое ребро принадлежит какому-то $X$-насыщенному паросочетанию.
+	
+	\textbf{Решение.} Рассмотрим произвольное ребро $e = (u, v)$ графа $G$($u\in X, v \in Y$). Удалим его. Заметим, что для всех $S$, таких, что $N(S)$ содержало вершину $v$ $|N(S)|$ уменьшилось на единицу(т.к. убрали ровно одно ребро). И значит неравенство из строгого превратится в нестрогое, т.е 
+	
+	$$|N(S)| \geqslant |S|, \forall S \subseteq X/\{u\}$$
+	
+	В этом случае, по теореме Холла в оставшимся после удаления ребра $e$ в графе $G' = (X / \{u\}, Y / \{v\})$ существует $X / \{u\}$-насыщенное паросочетание, добавив к которому ребро $e$ можно получить $X$-насыщенное паросочетание. Т.к. ребро $e$ выбрано произвольно, то описанное свойство выполняется для всех ребер, и требуемое утверждение доказано.
+	
+	\item Доказать, что в двудольном графе $G$ совершенное паросочетание существует тогда и только тогда,
+	когда для произвольного подмножества $X$ множества $V(G)$ вершин графа $G$ справедливо неравенство
+	
+	$$|X| \leqslant |N(X)|$$
+	
+	Заметим, что, в отличие от условий Холла, здесь не требуется, чтобы $X$ представляло собой
+	подмножество вершин одного блока двудольного графа $G$.
+	
+	\textbf{Решение.}
+	Докажем сначала необходимость этого условия, затем достаточность.
+	
+	$\Rightarrow$ Дано: совершенное паросочетание существует.
+	
+	Рассмотрим только граф составленный из ребер совершенного паросочетания. Очевидно, в этом случае неравенство превращается в равенство(т.к. все вершины имеют степень 1.): 
+	
+	$$|X| = |N(X)|, \forall X \in V(G)$$ 
+	
+	Добавив оставшиеся ребра значение $N(X)$ может только увеличиться, поэтому получим неравенство $|X| \leqslant |N(X)|$.
+	
+	$\Leftarrow$ Дано: неравенство $|S| \leqslant |N(S)|$.
+	
+	Обозначим доли графа $X,Y$. И запишем данное условие для них:
+	
+	\begin{itemize}
+		\item $S = X \rightarrow |X| \leqslant |N(X)|$
+		\item $S = Y \rightarrow |Y| \leqslant |N(Y)|$
+	\end{itemize}
+	
+	Заметим, что с другой стороны: $|N(Y)| \leqslant |X|$, а $|N(X)| \leqslant |Y|$. Т.к. все вершины из $N(X)$ и $N(Y)$ находятся в другой доле.
+	
+	Запишем все неравенства вместе:
+	
+	$$|Y| \leqslant |N(Y)| \leqslant |X| \leqslant |N(X)| \leqslant |Y| \Rightarrow |X| = |Y|$$.
+
+	Теперь заметим, что для $X$ выполнено условие теоремы Холла, значит существует $X$-насыщенное паросочетание. А т.к. $|X| = |Y|$, то $X$-насыщенное паросочетание является совершенным.
+	\end{enumerate}
+	
+	
+\end{document}
+
